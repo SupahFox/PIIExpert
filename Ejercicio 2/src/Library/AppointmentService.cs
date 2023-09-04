@@ -5,45 +5,39 @@ namespace Library
 {
     public class AppointmentService
     {
-        public static string CreateAppointment(string name, string id, string phoneNumber, DateTime date, string appoinmentPlace, string doctorName)
+        public static string CreateAppointment(Patient patient, DateTime date, string appoinmentPlace, Doctor doctor)
         {
             StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
             Boolean isValid = true;
+            Boolean isValidDoctor = true;
+            Boolean isValidPatient = true;
 
-            if (string.IsNullOrEmpty(name))
+            //Checkeo si algún valor falta. SI DATA CHECK ES FALSE SIGNIFICA QUE PASÓ LA PRUEBA
+            if (doctor.DataCheck() == false)
             {
-                stringBuilder.Append("Unable to schedule appointment, 'name' is required\n");
-                isValid = false;
+                stringBuilder.Append("Unable to schedule appointment, doctor data is required\n");
+                isValidDoctor = false;
             }
 
-            if (string.IsNullOrEmpty(id))
+            //Checkeo si algún valor falta. SI DATA CHECK ES FALSE SIGNIFICA QUE PASÓ LA PRUEBA
+            if (patient.DataCheck() == false)
             {
-                stringBuilder.Append("Unable to schedule appointment, 'id' is required\n");
-                isValid = false;
+                stringBuilder.Append("Unable to schedule appointment, patient data is required\n");
+                isValidPatient = false;
             }
 
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'phone number' is required\n");
-                isValid = false;
-            }
-
+            //Checkeo si algún valor falta. SI DATA CHECK ES FALSE SIGNIFICA QUE PASÓ LA PRUEBA
             if (string.IsNullOrEmpty(appoinmentPlace))
             {
                 stringBuilder.Append("Unable to schedule appointment, 'appoinment place' is required\n");
                 isValid = false;
             }
 
-
-            if (string.IsNullOrEmpty(doctorName))
+            //ESTO ES PARA NO DEVOLVER 3 VECES EL Appointment scheduled
+            //Le corregí la falta de ortografía también
+            if (isValid == true && isValidDoctor == true && isValidPatient == true)
             {
-                stringBuilder.Append("Unable to schedule appointment, 'doctor name' is required\n");
-                isValid = false;
-            }
-
-            if (isValid)
-            {
-                stringBuilder.Append("Appoinment scheduled");
+                stringBuilder.Append("Appointment scheduled");
             }
 
             return stringBuilder.ToString();

@@ -9,8 +9,12 @@ namespace Ucu.Poo.Expert
         {
             Book book1 = new Book("Design Patterns","Erich Gamma & Others","001-034");
             Book book2 = new Book("Pro C#","Troelsen","001-035");
-            book1.ShelveBook("A","7");
-            book2.ShelveBook("B","3");
+
+            ShelveBook book1_sh = new ShelveBook(book1, "A", "7");
+            ShelveBook book2_sh = new ShelveBook(book2, "B", "3");
+
+            book1_sh.GetInfo();
+            book2_sh.GetInfo();
 
         }
     }
